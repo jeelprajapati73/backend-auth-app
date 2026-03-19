@@ -1,0 +1,19 @@
+<link rel="stylesheet" href="style.css">
+<div class="container">
+  <h2>Dashboard</h2>
+  <button onclick="load()">Load Data</button>
+  <p id="data"></p>
+</div>
+
+<script>
+async function load() {
+  const token = localStorage.getItem("token");
+
+  const res = await fetch("http://localhost:5000/api/auth/dashboard", {
+    headers: { Authorization: token }
+  });
+
+  const d = await res.json();
+  data.innerText = d.msg;
+}
+</script>
