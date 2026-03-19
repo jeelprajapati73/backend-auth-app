@@ -1,23 +1,62 @@
 body {
-  font-family: Arial;
-  background: #0f172a;
+  margin: 0;
+  font-family: 'Poppins', sans-serif;
+  background: linear-gradient(135deg, #5fc5be, #4827a1);
   color: white;
-  text-align: center;
+
+  /* Center container horizontally & vertically */
+  display: flex;
+  justify-content: center; /* horizontal center */
+  align-items: center;     /* vertical center */
+  min-height: 100vh;       /* full viewport height */
+  flex-direction: column;  /* stack navbar + container vertically */
+}
+
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  padding: 15px 30px;
+  background: rgba(255,255,255,0.05);
+  border-bottom: 1px solid #493773;
+  width: 100%; /* stretch navbar */
+  box-sizing: border-box;
 }
 
 .container {
-  margin-top: 100px;
+  max-width: 600px;
+  text-align: center;
+  padding: 20px;
+  
+  /* optional: add a little shadow for floating effect */
+  box-shadow: 0 0 20px rgba(0,0,0,0.2);
 }
 
-input, button {
+.card {
+  background: rgba(255, 255, 255, 0.123);
+  padding: 20px;
+  margin: 20px 0;
+  border-radius: 12px;
+  backdrop-filter: blur(10px);
+}
+
+input {
   padding: 10px;
-  margin: 10px;
-  border-radius: 5px;
+  margin: 10px 0;
+  width: 90%;
+  border-radius: 8px;
   border: none;
 }
 
 button {
-  background: #22c55e;
+  padding: 10px 15px;
+  border: none;
+  border-radius: 8px;
+  background: #8737d1;
   color: white;
   cursor: pointer;
+  margin: 5px;
+}
+
+button:hover {
+  background: #c928a6;
 }

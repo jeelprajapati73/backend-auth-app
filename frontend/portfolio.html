@@ -1,0 +1,45 @@
+<link rel="stylesheet" href="style.css">
+
+<div class="navbar">
+  <h2>My Skills</h2>
+  <button onclick="logout()">Logout</button>
+  <button class="back-btn" onclick="goBack()">← Back</button>
+
+</div>
+
+<div class="container">
+
+  <div class="card">
+    <h3>APIs</h3>
+    <p>Design and build REST APIs using Node.js & Express.</p>
+  </div>
+
+  <div class="card">
+    <h3>Databases</h3>
+    <p>Store and manage data using MongoDB.</p>
+  </div>
+
+  <div class="card">
+    <h3>Authentication</h3>
+    <p>Secure login system using JWT and bcrypt.</p>
+  </div>
+
+  <div class="card">
+    <h3>Backend Logic</h3>
+    <p>Handle server-side logic and data processing.</p>
+  </div>
+
+  <button onclick="goDashboard()">Go to Dashboard</button>
+
+</div>
+
+<script>
+function goDashboard() {
+  window.location = "dashboard.html";
+}
+
+function logout() {
+  localStorage.removeItem("token");
+  window.location = "login.html";
+}
+</script>

@@ -1,20 +1,28 @@
 <link rel="stylesheet" href="style.css">
-<div class="container">
+
+<div class="container card">
   <h2>Signup</h2>
-  <input id="u" placeholder="Username">
-  <input id="p" type="password" placeholder="Password">
+  <input id="email" placeholder="Email">
+  <input id="username" placeholder="Username">
+  <input id="password" type="password" placeholder="Password">
   <button onclick="signup()">Signup</button>
+  <button class="back-btn" onclick="goBack()">← Back</button>
+
 </div>
 
 <script>
 async function signup() {
-  await fetch("http://localhost:5000/api/auth/signup", {
+  const res = await fetch("http://localhost:5000/api/auth/signup", {
     method: "POST",
-    headers: {"Content-Type": "application/json"},
-    body: JSON.stringify({username: u.value, password: p.value})
+    headers: {"Content-Type":"application/json"},
+    body: JSON.stringify({
+      email: email.value,
+      username: username.value,
+      password: password.value
+    })
   });
-
-  alert("User created");
-  window.location = "login.html";
+  const data = await res.json();
+  alert(data.msg); // popup for errors or success
+  if (res.ok) window.location = "login.html";
 }
 </script>

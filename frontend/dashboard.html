@@ -1,19 +1,49 @@
 <link rel="stylesheet" href="style.css">
-<div class="container">
+
+<div class="navbar">
   <h2>Dashboard</h2>
-  <button onclick="load()">Load Data</button>
-  <p id="data"></p>
+  <button onclick="logout()">Logout</button>
+  <button class="back-btn" onclick="goBack()">← Back</button>
+
+</div>
+
+<div class="container">
+  <div class="card">
+    <h3>User Info</h3>
+    <p id="user"></p>
+  </div>
+
+  <div class="card">
+    <h3>Backend Features</h3>
+    <ul id="features"></ul>
+  </div>
 </div>
 
 <script>
-async function load() {
+async function loadDashboard() {
   const token = localStorage.getItem("token");
-
   const res = await fetch("http://localhost:5000/api/auth/dashboard", {
     headers: { Authorization: token }
   });
-
-  const d = await res.json();
-  data.innerText = d.msg;
+  const data = await res.json();
+  if (!res.ok) {
+    alert(data.msg);
+    window.location = "login.html";
+    return;
+  }
+  document.getElementById("user").innerText = `Email: ${data.user.email} | Username: ${data.user.username}`;
+  const ul = document.getElementById("features");
+  data.backendFeatures.forEach(f => {
+    const li = document.createElement("li");
+    li.innerText = f;
+    ul.appendChild(li);
+  });
 }
+
+function logout() {
+  localStorage.removeItem("token");
+  window.location = "login.html";
+}
+
+loadDashboard();
 </script>

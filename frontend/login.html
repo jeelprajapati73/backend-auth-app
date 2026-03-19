@@ -1,21 +1,49 @@
 <link rel="stylesheet" href="style.css">
-<div class="container">
+
+<div class="container card">
+  <button class="back-btn" onclick="goBack()">← Back</button>
   <h2>Login</h2>
-  <input id="u" placeholder="Username">
-  <input id="p" type="password" placeholder="Password">
+  <input id="emailOrUsername" placeholder="Email or Username">
+  <input id="password" type="password" placeholder="Password">
   <button onclick="login()">Login</button>
 </div>
 
 <script>
-async function login() {
-  const res = await fetch("http://localhost:5000/api/auth/login", {
-    method: "POST",
-    headers: {"Content-Type": "application/json"},
-    body: JSON.stringify({username: u.value, password: p.value})
-  });
+  // Get input elements
+  const emailOrUsername = document.getElementById("emailOrUsername");
+  const password = document.getElementById("password");
 
-  const data = await res.json();
-  localStorage.setItem("token", data.token);
-  window.location = "dashboard.html";
-}
+  async function login() {
+    // Make API request
+    const res = await fetch("http://localhost:5000/api/auth/login", {
+      method: "POST",
+      headers: {"Content-Type":"application/json"},
+      body: JSON.stringify({
+        emailOrUsername: emailOrUsername.value,
+        password: password.value
+      })
+    });
+
+    const data = await res.json();
+
+    // Show popup for errors
+    if (!res.ok) {
+      alert(data.msg);
+      return;
+    }
+
+    // Successful login
+    localStorage.setItem("token", data.token);
+    alert("Login successful!");
+    window.location = "dashboard.html";
+  }
+
+  // Back button function
+  function goBack() {
+    if (document.referrer) {
+      window.history.back();
+    } else {
+      window.location = "index.html";
+    }
+  }
 </script>
